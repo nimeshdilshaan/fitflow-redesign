@@ -1,0 +1,26 @@
+cat > .gitignore << 'EOF'
+# Flutter / Dart (frontend)
+frontend/build/
+frontend/.dart_tool/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/.packages
+*.iml
+
+# Node / NestJS (backend)
+backend/node_modules/
+backend/dist/
+backend/.env
+npm-debug.log*
+
+# Python / FastAPI (ai-service)
+ai-service/__pycache__/
+ai-service/.venv/
+ai-service/*.pyc
+ai-service/.env
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
