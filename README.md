@@ -1,39 +1,56 @@
 # FitFlow Redesign
 
-Redesign of the FitFlow fitness app, addressing the usability and business
-problems identified in the IT3060 HCI case study (declining retention, a
-3.8-star app rating, and weak AI/social/nutrition features).
+FitFlow Redesign is a personalized fitness and wellness platform designed to provide users with personalized workout plans, nutrition tracking, social sharing, and AI-powered recommendations.
 
-## Tech Stack
-- **Frontend:** Flutter (single codebase — iOS, Android, Web)
-- **Backend:** NestJS (TypeScript) — modular services for Workout, Nutrition,
-  Social and Progress
-- **AI Microservice:** Python / FastAPI — personalized workout and nutrition
-  recommendations
-- **Databases:** PostgreSQL (system of record), MongoDB (social feed/activity
-  logs), Redis (cache, sessions, pub/sub)
-- **Authentication:** Firebase Auth
+## Project Overview
 
-See [`docs/tech-stack-summary.md`](docs/tech-stack-summary.md) and
-[`docs/comparison-matrix.md`](docs/comparison-matrix.md) for the full
-rationale, and [`docs/adr/ADR-001-tech-stack.md`](docs/adr/ADR-001-tech-stack.md)
-for the formal decision record.
+The system consists of:
 
-## Architecture
-![Architecture Diagram](docs/architecture-diagram.png)
+- Flutter frontend application
+- NestJS backend API
+- FastAPI AI recommendation service
+- PostgreSQL database
+- Redis caching layer
+- Real-time communication layer
+- Authentication and authorization services
 
-## Folder Structure
+## Main Features
 
+- User registration and authentication
+- Personalized workout plans
+- Workout tracking
+- Nutrition tracking
+- AI-powered recommendations
+- Social sharing
+- Progress tracking
+- Real-time notifications
+
+## Technology Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Flutter |
+| Backend | NestJS |
+| AI Service | FastAPI / Python |
+| Database | PostgreSQL |
+| Cache | Redis |
+| Real-time | WebSocket / Socket.IO |
+| Authentication | JWT |
+| API Documentation | Swagger |
+| Version Control | Git / GitHub |
+
+## Project Structure
+
+```text
 fitflow-redesign/
-├── frontend/                # Flutter app (iOS, Android, Web)
-├── backend/                 # NestJS API services
-├── ai-service/              # FastAPI recommendation engine
+├── frontend/
+├── backend/
+├── ai-service/
 ├── docs/
+│   ├── adr/
 │   ├── tech-stack-summary.md
 │   ├── comparison-matrix.md
-│   ├── architecture-diagram.png
-│   └── adr/
-│       └── ADR-001-tech-stack.md
+│   └── architecture-diagram.png
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
