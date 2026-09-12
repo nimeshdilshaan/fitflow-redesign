@@ -14,7 +14,12 @@ The system consists of:
 - Real-time communication layer
 - Authentication and authorization services
 
+<<<<<<< HEAD
 ## Main Features
+=======
+
+## Folder Structure
+>>>>>>> main
 
 - User registration and authentication
 - Personalized workout plans
