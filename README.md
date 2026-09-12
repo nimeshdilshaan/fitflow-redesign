@@ -22,6 +22,7 @@ for the formal decision record.
 ## Architecture
 ![Architecture Diagram](docs/architecture-diagram.png)
 
+
 ## Folder Structure
 
 fitflow-redesign/
