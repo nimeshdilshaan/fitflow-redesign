@@ -204,10 +204,10 @@ class _TopBar extends StatelessWidget {
           ],
         ),
         const SizedBox(width: 16),
-        const CircleAvatar(
+        CircleAvatar(
           radius: 22,
           backgroundColor: AppColors.cardAlt,
-          child: Icon(Icons.person, color: AppColors.textSecondary),
+          backgroundImage: const AssetImage('assets/images/avatar.png'),
         ),
       ],
     );
@@ -352,53 +352,81 @@ class DashboardScreen extends StatelessWidget {
           const SizedBox(height: 12),
 
           // Featured workout
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(22),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: AppColors.border),
-              gradient: const LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Color(0xFF1C212B), Color(0xFF4A3010)],
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              width: double.infinity,
+              height: 220,
+              decoration: BoxDecoration(
+                color: AppColors.card,
+                border: Border.all(color: AppColors.border),
+                borderRadius: BorderRadius.circular(20),
               ),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Full Body HIIT',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 6),
-                      const Text('30 Mins  |  High Intensity',
-                          style: TextStyle(color: AppColors.textSecondary)),
-                      const SizedBox(height: 18),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: const LinearGradient(
-                            colors: [AppColors.orange, AppColors.orangeDark],
-                          ),
-                        ),
-                        child: FilledButton(
-                          style: FilledButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                          ),
-                          onPressed: () {},
-                          child: const Text('Start Workout'),
+              child: Stack(
+                children: [
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: 200,
+                    child: Image.asset(
+                      'assets/images/featured.png',
+                      fit: BoxFit.cover,
+                      alignment: Alignment.topCenter,
+                    ),
+                  ),
+                  // fade image into the card on the left
+                  Positioned.fill(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [
+                            AppColors.card,
+                            AppColors.card.withOpacity(0.92),
+                            AppColors.card.withOpacity(0.0),
+                          ],
+                          stops: const [0.0, 0.45, 0.8],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                const Icon(Icons.fitness_center,
-                    size: 80, color: Color(0x66FFA11A)),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(22),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Full Body HIIT',
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 6),
+                        const Text('30 Mins  |  High Intensity',
+                            style: TextStyle(
+                                color: AppColors.textSecondary, fontSize: 13)),
+                        const SizedBox(height: 18),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: const LinearGradient(
+                              colors: [AppColors.orange, AppColors.orangeDark],
+                            ),
+                          ),
+                          child: FilledButton(
+                            style: FilledButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              shadowColor: Colors.transparent,
+                            ),
+                            onPressed: () {},
+                            child: const Text('Start Workout'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 
@@ -421,7 +449,7 @@ class DashboardScreen extends StatelessWidget {
                 child: _ProgramCard(
                   title: 'Strength Builder',
                   weeks: '4',
-                  icon: Icons.fitness_center,
+                  image: 'assets/images/program_strength.png',
                 ),
               ),
               SizedBox(width: 12),
@@ -429,7 +457,7 @@ class DashboardScreen extends StatelessWidget {
                 child: _ProgramCard(
                   title: 'Fat Burn Challenge',
                   weeks: '6',
-                  icon: Icons.local_fire_department,
+                  image: 'assets/images/program_fatburn.png',
                 ),
               ),
             ],
@@ -496,48 +524,54 @@ class _Dot extends StatelessWidget {
 class _ProgramCard extends StatelessWidget {
   final String title;
   final String weeks;
-  final IconData icon;
+  final String image;
   const _ProgramCard(
-      {required this.title, required this.weeks, required this.icon});
+      {required this.title, required this.weeks, required this.image});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 170,
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppColors.border),
-        gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color(0xFF3A2A1C), Color(0xFF1C212B)],
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(18),
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.card,
+          border: Border.all(color: AppColors.border),
+          borderRadius: BorderRadius.circular(18),
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Center(
-              child: Icon(icon, size: 52, color: const Color(0x88FFA11A)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AspectRatio(
+              aspectRatio: 1.7,
+              child: Image.asset(image, fit: BoxFit.cover),
             ),
-          ),
-          Text(title,
-              style:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 3),
-          Text.rich(TextSpan(children: [
-            TextSpan(
-                text: weeks,
-                style: const TextStyle(
-                    color: AppColors.yellow,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16)),
-            const TextSpan(
-                text: ' Weeks',
-                style: TextStyle(color: AppColors.textSecondary)),
-          ])),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 3),
+                  Text.rich(TextSpan(children: [
+                    TextSpan(
+                        text: weeks,
+                        style: const TextStyle(
+                            color: AppColors.yellow,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15)),
+                    const TextSpan(
+                        text: ' Weeks',
+                        style: TextStyle(color: AppColors.textSecondary)),
+                  ])),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
